@@ -103,6 +103,8 @@ export default class AppContainer extends Component {
   }
 
   render () {
+    console.log(this.state)
+
     return (
       <div id="main" className="container-fluid">
         <div className="col-xs-2">
