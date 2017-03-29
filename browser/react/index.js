@@ -21,7 +21,7 @@ ReactDOM.render(
               <Route path="songs" component={Songs} />
             </Route>
         </Route>
-        <Route path="*" >
+        <Route path="*">
           <IndexRedirect to="/" />
         </Route>
     </Router>,
