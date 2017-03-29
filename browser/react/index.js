@@ -21,6 +21,9 @@ ReactDOM.render(
               <Route path="songs" component={Songs} />
             </Route>
         </Route>
+        <Route path="*" >
+          <IndexRedirect to="/" />
+        </Route>
     </Router>,
     document.getElementById('app')
 );
