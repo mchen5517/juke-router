@@ -8,7 +8,6 @@ import Songs from '../components/Songs';
     }
 
      componentDidMount () {
-        console.log(this.album)
          const albumId = this.props.routeParams.albumId;
          const selectAlbum = this.props.selectAlbum;
          selectAlbum(albumId);

@@ -8,6 +8,9 @@ import Albums from '../components/Albums.js';
 import Album from '../components/Album';
 import Sidebar from '../components/Sidebar';
 import Player from '../components/Player';
+import Artists from '../components/Artists';
+import Artist from '../components/Artist';
+
 
 import { convertAlbum, convertAlbums, skip } from '../utils';
 
@@ -23,12 +26,18 @@ export default class AppContainer extends Component {
     this.prev = this.prev.bind(this);
     this.selectAlbum = this.selectAlbum.bind(this);
     this.deselectAlbum = this.deselectAlbum.bind(this);
+    this.selectArtist = this.selectArtist.bind(this);
   }
 
   componentDidMount () {
     axios.get('/api/albums/')
       .then(res => res.data)
       .then(album => this.onLoad(convertAlbums(album)));
+
+    axios.get('/api/artists/')
+      .then(res => res.data)
+      .then(artists => this.setState({artists}))
+      .catch(err => console.log(err));
 
     AUDIO.addEventListener('ended', () =>
       this.next());
@@ -98,13 +107,19 @@ export default class AppContainer extends Component {
       }));
   }
 
+  selectArtist (artistId) {
+    axios.get(`/api/artists/${artistId}`)
+      .then(res => res.data)
+      .then(artist => this.setState({
+        selectedArtist: artist
+      }));
+  }
+
   deselectAlbum () {
     this.setState({ selectedAlbum: {}});
   }
 
   render () {
-    console.log(this.state)
-
     return (
       <div id="main" className="container-fluid">
         <div className="col-xs-2">
@@ -123,7 +138,14 @@ export default class AppContainer extends Component {
 
                     // Albums (plural) component's props
                     albums: this.state.albums,
-                    selectAlbum: this.selectAlbum // note that this.selectAlbum is a method, and this.state.selectedAlbum is the chosen album
+                    selectAlbum: this.selectAlbum, // note that this.selectAlbum is a method, and this.state.selectedAlbum is the chosen album
+
+                    // Artists
+                    artists: this.state.artists,
+
+                    selectedArtist: this.state.selectedArtist,
+                    selectArtist: this.selectArtist
+
                 })
         }
         </div>
