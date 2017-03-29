@@ -18,7 +18,8 @@ import Songs from '../components/Songs';
   return (
     <div className="album">
       <div>
-        <h3>{ this.props.album.name }</h3>
+        <h3>{ this.props.album.name } <a href={`mailto:?subject=Not Spam!!!&body=Check out my groovy tunes: ${window.location.href}`}><span className="glyphicon glyphicon-share" aria-hidden="true"></span>
+</a></h3> 
         <img src={ this.props.album.imageUrl } className="img-thumbnail" />
       </div>
       <Songs
