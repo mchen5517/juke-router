@@ -25,19 +25,18 @@ class Artist extends React.Component {
    .then(albums => this.setState({albums: convertAlbums(albums)}))
    .then(() => axios.get(`/api/artists/${artistId}/songs`))
    .then(res => res.data)
-   .then(songs => this.setState({songs}))
+   .then(songs => this.setState({songs: songs.map(song => convertSong(song))}))
    .then(() => selectArtist(artistId));
  }
 
  render(){
   const selectedArtist = this.props.selectedArtist;
   const children = this.props.children;
-  const songsArr = this.state.songs.map((song) => convertSong(song)) || [];
   const propsToPassToChildren = {
       albums: this.state.albums,
       selectAlbum: this.props.selectAlbum,
 
-      songs: songsArr,
+      songs: this.state.songs,
       currentSong: this.props.currentSong,
       isPlaying: this.props.isPlaying,
       toggleOne: this.props.toggleOne
