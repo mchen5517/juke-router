@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
+import MenuLink from "./MenuLink";
+
 
 const Sidebar = (props) => {
 
@@ -9,14 +11,14 @@ const Sidebar = (props) => {
     <sidebar>
       <img src="/juke.svg" className="logo" />
       <section>
-        <h4 className="menu-item active">
-          <Link to="/albums">ALBUMS</Link>
-        </h4>
+          <MenuLink to="/albums">
+            ALBUMS
+          </MenuLink>
       </section>
       <section>
-        <h4 className="menu-item">
-          <Link to="/artists">ARTISTS</Link>
-        </h4>
+        <MenuLink to="/artists">
+            ARTISTS
+        </MenuLink>
       </section>
     </sidebar>
   );
