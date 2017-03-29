@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import axios from 'axios';
-import { convertAlbum, convertAlbums, skip } from '../utils';
+import { convertAlbum, convertAlbums, skip, convertSong } from '../utils';
 import Songs from '../components/Songs';
 import Albums from '../components/Albums';
 
@@ -32,11 +32,12 @@ class Artist extends React.Component {
  render(){
   const selectedArtist = this.props.selectedArtist;
   const children = this.props.children;
+  const songsArr = this.state.songs.map((song) => convertSong(song)) || [];
   const propsToPassToChildren = {
       albums: this.state.albums,
       selectAlbum: this.props.selectAlbum,
 
-      songs: this.state.songs,
+      songs: songsArr,
       currentSong: this.props.currentSong,
       isPlaying: this.props.isPlaying,
       toggleOne: this.props.toggleOne
